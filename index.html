@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NanimeX</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+    <!-- Splash -->
+    <div id="splash" class="splash">
+        <div class="splash-content">
+            <div class="logo">NanimeX</div>
+            <div class="loading"><div class="loading-bar"></div></div>
+        </div>
+    </div>
+
+    <!-- Auth -->
+    <div id="auth" class="auth hidden">
+        <div class="auth-box">
+            <h1>NanimeX</h1>
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('login')">Login</button>
+                <button class="tab" onclick="switchTab('register')">Daftar</button>
+            </div>
+            <div id="login-form">
+                <input type="email" id="login-email" placeholder="Email">
+                <input type="password" id="login-password" placeholder="Password">
+                <button class="btn-primary" onclick="login()">Login</button>
+                <button class="btn-google" onclick="googleLogin()">Login dengan Google</button>
+            </div>
+            <div id="register-form" class="hidden">
+                <input type="text" id="reg-user" placeholder="Username">
+                <input type="email" id="reg-email" placeholder="Email">
+                <input type="password" id="reg-pass" placeholder="Password">
+                <input type="text" id="owner-code" placeholder="Kode Owner (opsional)">
+                <button class="btn-primary" onclick="register()">Daftar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- App -->
+    <div id="app" class="hidden">
+        <nav>
+            <button class="nav-item active" data-page="home">
+                <span class="nav-icon">🏠</span>
+                <span>Beranda</span>
+            </button>
+            <button class="nav-item" data-page="search">
+                <span class="nav-icon">🔍</span>
+                <span>Cari</span>
+            </button>
+            <button class="nav-item" data-page="feed">
+                <span class="nav-icon">📱</span>
+                <span>Feed</span>
+            </button>
+            <button class="nav-item" data-page="profile">
+                <span class="nav-icon">👤</span>
+                <span>Profil</span>
+            </button>
+        </nav>
+        <main id="main"></main>
+    </div>
+
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+        import { getStorage } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD4wgAsZWj_WKI6QCHaprYT-84YjyiSMBM",
+            authDomain: "animekuid-efaee.firebaseapp.com",
+            projectId: "animekuid-efaee",
+            storageBucket: "animekuid-efaee.firebasestorage.app",
+            messagingSenderId: "177148114828",
+            appId: "1:177148114828:web:86547cd8a08dda5f2608a9"
+        };
+
+        window.app = initializeApp(firebaseConfig);
+        window.auth = getAuth(window.app);
+        window.db = getFirestore(window.app);
+        window.storage = getStorage(window.app);
+        window.googleProvider = new GoogleAuthProvider();
+        window.OWNER_CODE = "NANIMEX2024";
+    </script>
+
+    <script type="module" src="hls-player.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
